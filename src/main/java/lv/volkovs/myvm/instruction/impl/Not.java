@@ -1,9 +1,9 @@
 package lv.volkovs.myvm.instruction.impl;
 
-import lv.volkovs.myvm.heap.Memory;
+import lv.volkovs.myvm.program.Memory;
 import lv.volkovs.myvm.instruction.Instruction;
 
-import static lv.volkovs.myvm.heap.Value15.not;
+import static lv.volkovs.myvm.program.Value15.not;
 
 
 /**

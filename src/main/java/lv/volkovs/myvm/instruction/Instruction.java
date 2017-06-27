@@ -1,6 +1,6 @@
 package lv.volkovs.myvm.instruction;
 
-import lv.volkovs.myvm.heap.Memory;
+import lv.volkovs.myvm.program.Memory;
 
 /**
  * @author Mihails Volkovs mihails.volkovs@gmail.com

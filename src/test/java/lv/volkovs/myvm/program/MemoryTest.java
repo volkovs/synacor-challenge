@@ -1,12 +1,12 @@
-package lv.volkovs.myvm.heap;
+package lv.volkovs.myvm.program;
 
 import org.junit.jupiter.api.Test;
 
-import static lv.volkovs.myvm.heap.Memory.EMPTY_SLOT;
-import static lv.volkovs.myvm.heap.Memory.MAX_VALUE;
-import static lv.volkovs.myvm.heap.Memory.REGISTER_0;
-import static lv.volkovs.myvm.heap.Memory.REGISTER_7;
-import static lv.volkovs.myvm.heap.Memory.isRegister;
+import static lv.volkovs.myvm.program.Memory.EMPTY_SLOT;
+import static lv.volkovs.myvm.program.Memory.MAX_VALUE;
+import static lv.volkovs.myvm.program.Memory.REGISTER_0;
+import static lv.volkovs.myvm.program.Memory.REGISTER_7;
+import static lv.volkovs.myvm.program.Memory.isRegister;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 

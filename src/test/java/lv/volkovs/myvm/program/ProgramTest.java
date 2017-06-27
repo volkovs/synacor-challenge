@@ -1,4 +1,4 @@
-package lv.volkovs.myvm.heap;
+package lv.volkovs.myvm.program;
 
 import org.junit.Rule;
 import org.junit.contrib.java.lang.system.SystemOutRule;

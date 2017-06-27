@@ -1,4 +1,4 @@
-package lv.volkovs.myvm.heap;
+package lv.volkovs.myvm.program;
 
 import lv.volkovs.myvm.instruction.Instruction;
 import lv.volkovs.myvm.instruction.Opcode;

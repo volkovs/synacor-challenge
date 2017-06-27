@@ -1,4 +1,4 @@
-package lv.volkovs.myvm.heap;
+package lv.volkovs.myvm.program;
 
 import com.google.common.annotations.VisibleForTesting;
 

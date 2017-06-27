@@ -1,4 +1,4 @@
-package lv.volkovs.myvm.heap;
+package lv.volkovs.myvm.program;
 
 /**
  * @author Mihails Volkovs mihails.volkovs@gmail.com

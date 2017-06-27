@@ -1,8 +1,8 @@
-package lv.volkovs.myvm.heap;
+package lv.volkovs.myvm.program;
 
 import org.junit.jupiter.api.Test;
 
-import static lv.volkovs.myvm.heap.ProgramLoader.decodeLittleEndian;
+import static lv.volkovs.myvm.program.ProgramLoader.decodeLittleEndian;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**

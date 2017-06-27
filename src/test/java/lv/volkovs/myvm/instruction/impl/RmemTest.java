@@ -1,11 +1,11 @@
 package lv.volkovs.myvm.instruction.impl;
 
-import lv.volkovs.myvm.heap.Memory;
+import lv.volkovs.myvm.program.Memory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static lv.volkovs.myvm.heap.Memory.REGISTER_0;
-import static lv.volkovs.myvm.heap.Memory.REGISTER_2;
+import static lv.volkovs.myvm.program.Memory.REGISTER_0;
+import static lv.volkovs.myvm.program.Memory.REGISTER_2;
 import static org.assertj.core.api.Assertions.assertThat;
 
 

@@ -1,16 +1,16 @@
-package lv.volkovs.myvm.heap;
+package lv.volkovs.myvm.program;
 
 import org.junit.jupiter.api.Test;
 
 import static java.lang.Integer.valueOf;
-import static lv.volkovs.myvm.heap.Value15.MAX_VALUE;
-import static lv.volkovs.myvm.heap.Value15.add;
-import static lv.volkovs.myvm.heap.Value15.and;
-import static lv.volkovs.myvm.heap.Value15.mod;
-import static lv.volkovs.myvm.heap.Value15.mult;
-import static lv.volkovs.myvm.heap.Value15.normalize;
-import static lv.volkovs.myvm.heap.Value15.not;
-import static lv.volkovs.myvm.heap.Value15.or;
+import static lv.volkovs.myvm.program.Value15.MAX_VALUE;
+import static lv.volkovs.myvm.program.Value15.add;
+import static lv.volkovs.myvm.program.Value15.and;
+import static lv.volkovs.myvm.program.Value15.mod;
+import static lv.volkovs.myvm.program.Value15.mult;
+import static lv.volkovs.myvm.program.Value15.normalize;
+import static lv.volkovs.myvm.program.Value15.not;
+import static lv.volkovs.myvm.program.Value15.or;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**

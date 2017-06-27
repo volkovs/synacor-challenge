@@ -1,7 +1,7 @@
 package lv.volkovs.myvm.instruction.impl;
 
 
-import lv.volkovs.myvm.heap.Memory;
+import lv.volkovs.myvm.program.Memory;
 import lv.volkovs.myvm.instruction.Instruction;
 
 
