@@ -1,7 +1,6 @@
 package lv.volkovs.myvm.instruction.impl;
 
 import lv.volkovs.myvm.heap.Memory;
-import lv.volkovs.myvm.heap.Value15;
 import lv.volkovs.myvm.instruction.Instruction;
 
 
@@ -19,7 +18,7 @@ public class Pop implements Instruction {
 
     @Override
     public int execute(Memory memory, int pointer) {
-        Value15 valueFromStack = memory.pop();
+        int valueFromStack = memory.pop();
         memory.set(indexTo, valueFromStack);
         return DO_NOT_JUMP;
     }

@@ -1,8 +1,6 @@
 package lv.volkovs.myvm.instruction.impl;
 
 import lv.volkovs.myvm.heap.Memory;
-
-import lv.volkovs.myvm.heap.Value15;
 import lv.volkovs.myvm.instruction.Instruction;
 
 
@@ -24,10 +22,10 @@ public class Eq implements Instruction {
 
     @Override
     public int execute(Memory memory, int pointer) {
-        if (memory.constOrRegister(value1).toInt() == memory.constOrRegister(value2).toInt()) {
-            memory.set(destination, new Value15(1));
+        if (memory.constOrRegister(value1) == memory.constOrRegister(value2)) {
+            memory.set(destination, 1);
         } else {
-            memory.set(destination, new Value15(0));
+            memory.set(destination, 0);
         }
         return DO_NOT_JUMP;
     }

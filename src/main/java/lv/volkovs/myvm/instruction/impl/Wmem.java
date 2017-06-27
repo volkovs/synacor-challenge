@@ -21,7 +21,7 @@ public class Wmem implements Instruction {
 
     @Override
     public int execute(Memory memory, int pointer) {
-        memory.set(memory.constOrRegister(destination).toInt(), memory.constOrRegister(value));
+        memory.set(memory.constOrRegister(destination), memory.constOrRegister(value));
         return DO_NOT_JUMP;
     }
 

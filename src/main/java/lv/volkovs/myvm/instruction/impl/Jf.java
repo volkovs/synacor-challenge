@@ -22,7 +22,7 @@ public class Jf implements Instruction {
 
     @Override
     public int execute(Memory memory, int pointer) {
-        if (memory.constOrRegister(zero).toInt() == 0) {
+        if (memory.constOrRegister(zero) == 0) {
             return jumpTo;
         }
         return DO_NOT_JUMP;

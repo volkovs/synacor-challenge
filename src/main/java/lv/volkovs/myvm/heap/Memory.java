@@ -5,7 +5,6 @@ import com.google.common.annotations.VisibleForTesting;
 import java.util.Stack;
 
 import static java.lang.String.format;
-import static lv.volkovs.myvm.heap.Value15.ZERO;
 
 /**
  * @author Mihails Volkovs mihails.volkovs@gmail.com
@@ -30,42 +29,45 @@ public class Memory {
 
     private final int[] addressSpace;
 
-    private Value15[] registers = new Value15[8];
+    private int[] registers = new int[8];
 
     // unlimited stack
-    private Stack<Value15> stack = new Stack<>();
+    private Stack<Integer> stack = new Stack<>();
 
     public Memory(int[] addressSpace) {
         this.addressSpace = addressSpace;
     }
 
-    public Value15 constOrRegister(int operand) {
+    public int constOrRegister(int operand) {
 
         // value in register
         if (isRegister(operand)) {
-            return new Value15(get(operand));
+            return get(operand);
         }
 
         // constant value
-        return new Value15(operand);
+        return operand;
     }
 
+    /**
+     * Gets value from memory.
+     *
+     * Provided argument is pointer into either memory address space
+     * or into registers. In later case memory index is looked up in
+     * according register.
+     */
     public int get(int index) {
         if (isRegister(index)) {
-            Value15 register = registers[index % MAX_VALUE - 1];
-            if (register == null) {
-                return 0;
-            }
-            return register.toInt();
+            return registers[toRegisterNumber(index)];
         }
         return addressSpace[index];
     }
 
-    public void set(int index, Value15 value) {
+    public void set(int index, int value) {
         if (isRegister(index)) {
             registers[toRegisterNumber(index)] = value;
         } else {
-            addressSpace[index] = value.toInt();
+            addressSpace[index] = value;
         }
     }
 
@@ -74,24 +76,20 @@ public class Memory {
         return index > MAX_VALUE;
     }
 
-    public Value15 pop() {
+    public int pop() {
         return stack.pop();
     }
 
-    public void push(Value15 value) {
+    public void push(int value) {
         stack.push(value);
     }
 
-    public void setRegister(int register, Value15 value) {
+    public void setRegister(int register, int value) {
         registers[register] = value;
     }
 
-    public Value15 getRegister(int register) {
-        Value15 result = registers[register];
-        if (result == null) {
-            return ZERO;
-        }
-        return result;
+    public int getRegister(int register) {
+        return registers[register];
     }
 
     static String toString(int operand) {

@@ -1,8 +1,6 @@
 package lv.volkovs.myvm.instruction.impl;
 
 import lv.volkovs.myvm.heap.Memory;
-
-import lv.volkovs.myvm.heap.Value15;
 import lv.volkovs.myvm.instruction.Instruction;
 
 
@@ -20,8 +18,8 @@ public class Call implements Instruction {
 
     @Override
     public int execute(Memory memory, int pointer) {
-        memory.push(new Value15(pointer + 1));
-        return memory.constOrRegister(jumpTo).toInt();
+        memory.push(pointer + 1);
+        return memory.constOrRegister(jumpTo);
     }
 
 }

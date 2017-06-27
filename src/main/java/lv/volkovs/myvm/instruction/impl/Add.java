@@ -1,8 +1,9 @@
 package lv.volkovs.myvm.instruction.impl;
 
 import lv.volkovs.myvm.heap.Memory;
-import lv.volkovs.myvm.heap.Value15;
 import lv.volkovs.myvm.instruction.Instruction;
+
+import static lv.volkovs.myvm.heap.Value15.add;
 
 
 /**
@@ -23,9 +24,9 @@ public class Add implements Instruction {
 
     @Override
     public int execute(Memory memory, int pointer) {
-        Value15 value1 = memory.constOrRegister(operand1);
-        Value15 value2 = memory.constOrRegister(operand2);
-        Value15 result = value1.add(value2);
+        int value1 = memory.constOrRegister(operand1);
+        int value2 = memory.constOrRegister(operand2);
+        int result = add(value1, value2);
         memory.set(destination, result);
         return DO_NOT_JUMP;
     }

@@ -39,7 +39,7 @@ class MemoryTest {
 
     @Test
     void setRegister() {
-        memory.setRegister(0, new Value15(10));
+        memory.setRegister(0, 10);
         assertThat(memory.get(MAX_VALUE + 1)).isEqualTo(10);
     }
 
@@ -51,26 +51,26 @@ class MemoryTest {
 
     @Test
     void set() {
-        memory.set(REGISTER_0, Value15.MAX_VALUE);
-        assertThat(memory.getRegister(0)).isEqualTo(Value15.MAX_VALUE);
+        memory.set(REGISTER_0, MAX_VALUE);
+        assertThat(memory.getRegister(0)).isEqualTo(MAX_VALUE);
         assertThat(memory.get(REGISTER_0)).isEqualTo(MAX_VALUE);
 
-        memory.set(REGISTER_7, new Value15(10));
-        assertThat(memory.getRegister(7).toInt()).isEqualTo(10);
+        memory.set(REGISTER_7, 10);
+        assertThat(memory.getRegister(7)).isEqualTo(10);
         assertThat(memory.get(REGISTER_0)).isEqualTo(MAX_VALUE);
     }
 
     @Test
     void toValue() {
         Memory memory = new Memory(Memory.EMPTY_SLOT);
-        memory.setRegister(0, new Value15(10));
-        memory.set(MAX_VALUE, new Value15(1));
+        memory.setRegister(0, 10);
+        memory.set(MAX_VALUE, 1);
 
         // constant values are NOT resolved against memory address space
-        assertThat(memory.constOrRegister(MAX_VALUE)).isEqualTo(Value15.MAX_VALUE);
+        assertThat(memory.constOrRegister(MAX_VALUE)).isEqualTo(MAX_VALUE);
 
         // registers are resolved against memory
-        assertThat(memory.constOrRegister(REGISTER_0)).isEqualTo(new Value15(10));
+        assertThat(memory.constOrRegister(REGISTER_0)).isEqualTo(10);
     }
 
     @Test

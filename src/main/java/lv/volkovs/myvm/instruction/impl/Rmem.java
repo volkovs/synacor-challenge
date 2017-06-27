@@ -1,8 +1,6 @@
 package lv.volkovs.myvm.instruction.impl;
 
 import lv.volkovs.myvm.heap.Memory;
-
-import lv.volkovs.myvm.heap.Value15;
 import lv.volkovs.myvm.instruction.Instruction;
 
 
@@ -22,8 +20,8 @@ public class Rmem implements Instruction {
 
     @Override
     public int execute(Memory memory, int pointer) {
-        int result = memory.get(memory.constOrRegister(source).toInt());
-        memory.set(destination, new Value15(result));
+        int result = memory.get(memory.constOrRegister(source));
+        memory.set(destination, result);
         return DO_NOT_JUMP;
     }
 

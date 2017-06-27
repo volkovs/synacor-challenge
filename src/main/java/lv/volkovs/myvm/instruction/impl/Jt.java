@@ -1,8 +1,6 @@
 package lv.volkovs.myvm.instruction.impl;
 
 import lv.volkovs.myvm.heap.Memory;
-
-import lv.volkovs.myvm.heap.Value15;
 import lv.volkovs.myvm.instruction.Instruction;
 
 
@@ -23,8 +21,8 @@ public class Jt implements Instruction {
 
     @Override
     public int execute(Memory memory, int pointer) {
-        Value15 value15 = memory.constOrRegister(nonzero);
-        if (value15.toInt() != 0) {
+        int value = memory.constOrRegister(nonzero);
+        if (value != 0) {
             return jumpTo;
         }
         return DO_NOT_JUMP;

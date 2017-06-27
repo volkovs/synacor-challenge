@@ -1,9 +1,6 @@
 package lv.volkovs.myvm.instruction.impl;
 
 import lv.volkovs.myvm.heap.Memory;
-
-import lv.volkovs.myvm.heap.Value15;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,8 +25,8 @@ class RmemTest {
 
         // preparing content
         Memory memory = new Memory(Memory.EMPTY_SLOT);
-        memory.setRegister(2, new Value15(10));
-        memory.set(10, new Value15(15));
+        memory.setRegister(2, 10);
+        memory.set(10, 15);
 
         // instruction execution instance
         Rmem rmem = new Rmem(REGISTER_0, REGISTER_2);
@@ -38,7 +35,7 @@ class RmemTest {
         rmem.execute(memory, 0);
 
         // assertion
-        assertThat(memory.getRegister(0).toInt()).isEqualTo(15);
+        assertThat(memory.getRegister(0)).isEqualTo(15);
     }
 
 }

@@ -12,7 +12,7 @@ public class Ret implements Instruction {
 
     @Override
     public int execute(Memory memory, int pointer) {
-        return memory.pop().toInt();
+        return memory.pop();
     }
 
 }

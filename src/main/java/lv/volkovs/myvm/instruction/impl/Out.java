@@ -18,7 +18,7 @@ public class Out implements Instruction {
 
     @Override
     public int execute(Memory memory, int pointer) {
-        System.out.print((char) memory.constOrRegister(asciiCode).toInt());
+        System.out.print((char) memory.constOrRegister(asciiCode));
         return DO_NOT_JUMP;
     }
 

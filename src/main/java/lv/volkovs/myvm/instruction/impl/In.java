@@ -1,7 +1,6 @@
 package lv.volkovs.myvm.instruction.impl;
 
 import lv.volkovs.myvm.heap.Memory;
-import lv.volkovs.myvm.heap.Value15;
 import lv.volkovs.myvm.instruction.Instruction;
 
 import java.io.BufferedReader;
@@ -24,11 +23,11 @@ public class In implements Instruction {
 
     @Override
     public int execute(Memory memory, int pointer) {
-        Value15 result;
+        int result;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {
             String input = br.readLine();
-            result = new Value15(parseInt(input));
+            result = parseInt(input);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
