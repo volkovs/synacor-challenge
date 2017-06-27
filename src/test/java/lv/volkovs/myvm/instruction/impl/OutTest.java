@@ -1,7 +1,6 @@
-package lv.volkovs.myvm.instruction;
+package lv.volkovs.myvm.instruction.impl;
 
 
-import lv.volkovs.myvm.instruction.impl.Out;
 import org.junit.Rule;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.jupiter.api.Test;

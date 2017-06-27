@@ -1,7 +1,7 @@
 package lv.volkovs.myvm;
 
-import lv.volkovs.myvm.heap.Program;
-import lv.volkovs.myvm.heap.ProgramLoader;
+import lv.volkovs.myvm.program.Program;
+import lv.volkovs.myvm.program.ProgramLoader;
 
 import java.io.File;
 import java.net.URISyntaxException;
