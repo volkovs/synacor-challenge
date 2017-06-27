@@ -6,7 +6,7 @@ import static lv.volkovs.myvm.heap.Memory.EMPTY_SLOT;
 import static lv.volkovs.myvm.heap.Memory.MAX_VALUE;
 import static lv.volkovs.myvm.heap.Memory.REGISTER_0;
 import static lv.volkovs.myvm.heap.Memory.REGISTER_7;
-import static lv.volkovs.myvm.heap.Value15.ZERO;
+import static lv.volkovs.myvm.heap.Memory.isRegister;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 
@@ -27,7 +27,7 @@ class MemoryTest {
 
     @Test
     void get() {
-        assertThat(memory.get(MAX_ADDRESS)).isEqualTo(ZERO);
+        assertThat(memory.get(MAX_ADDRESS)).isEqualTo(0);
 
         try {
             memory.get(MAX_ADDRESS + 1);
@@ -40,25 +40,43 @@ class MemoryTest {
     @Test
     void setRegister() {
         memory.setRegister(0, new Value15(10));
-        assertThat(memory.get(MAX_VALUE + 1).toInt()).isEqualTo(10);
+        assertThat(memory.get(MAX_VALUE + 1)).isEqualTo(10);
     }
 
     @Test
-    void isRegister() {
-        assertThat(memory.isRegister(MAX_VALUE)).isEqualTo(false);
-        assertThat(memory.isRegister(MAX_VALUE + 1)).isEqualTo(true);
-        assertThat(memory.isRegister(MAX_VALUE + 8)).isEqualTo(true);
+    void is_register() {
+        assertThat(isRegister(MAX_VALUE)).isFalse();
+        assertThat(isRegister(REGISTER_0)).isTrue();
     }
 
     @Test
     void set() {
         memory.set(REGISTER_0, Value15.MAX_VALUE);
         assertThat(memory.getRegister(0)).isEqualTo(Value15.MAX_VALUE);
-        assertThat(memory.get(REGISTER_0)).isEqualTo(Value15.MAX_VALUE);
+        assertThat(memory.get(REGISTER_0)).isEqualTo(MAX_VALUE);
 
         memory.set(REGISTER_7, new Value15(10));
         assertThat(memory.getRegister(7).toInt()).isEqualTo(10);
-        assertThat(memory.get(REGISTER_0)).isEqualTo(Value15.MAX_VALUE);
+        assertThat(memory.get(REGISTER_0)).isEqualTo(MAX_VALUE);
+    }
+
+    @Test
+    void toValue() {
+        Memory memory = new Memory(Memory.EMPTY_SLOT);
+        memory.setRegister(0, new Value15(10));
+        memory.set(MAX_VALUE, new Value15(1));
+
+        // constant values are NOT resolved against memory address space
+        assertThat(memory.constOrRegister(MAX_VALUE)).isEqualTo(Value15.MAX_VALUE);
+
+        // registers are resolved against memory
+        assertThat(memory.constOrRegister(REGISTER_0)).isEqualTo(new Value15(10));
+    }
+
+    @Test
+    void to_string() {
+        assertThat(Memory.toString(MAX_VALUE)).isEqualTo("Const 32767");
+        assertThat(Memory.toString(REGISTER_0)).isEqualTo("Register 0");
     }
 
 }

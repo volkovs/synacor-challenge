@@ -16,8 +16,6 @@ public class Value15 {
 
     static final Value15 MAX_VALUE = new Value15(SIZE - 1);
 
-    public static final Value15 MIN_VALUE = ZERO;
-
     private final int value;
 
     public Value15(int value) {

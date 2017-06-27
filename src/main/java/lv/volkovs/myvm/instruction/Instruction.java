@@ -1,13 +1,15 @@
 package lv.volkovs.myvm.instruction;
 
+import lv.volkovs.myvm.heap.Memory;
+
 /**
  * @author Mihails Volkovs mihails.volkovs@gmail.com
  *         Date: 22.06.2017
  */
-public interface InstructionExecution {
+public interface Instruction {
 
     int DO_NOT_JUMP = -1;
 
-    int execute(InstructionExecutionContext context);
+    int execute(Memory memory, int pointer);
 
 }

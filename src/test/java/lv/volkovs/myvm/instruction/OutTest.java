@@ -1,6 +1,6 @@
 package lv.volkovs.myvm.instruction;
 
-import lv.volkovs.myvm.heap.Operand;
+
 import lv.volkovs.myvm.instruction.impl.Out;
 import org.junit.Rule;
 import org.junit.contrib.java.lang.system.SystemOutRule;
@@ -21,7 +21,7 @@ class OutTest {
 
     @Test
     void executeInternal() {
-        new Out(new Operand(65)).execute(new InstructionExecutionContext(null, 0));
+        new Out(65).execute(null, 0);
         assertThat(out.getLog()).isEqualTo("A");
     }
 

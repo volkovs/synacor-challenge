@@ -1,28 +1,27 @@
 package lv.volkovs.myvm.instruction.impl;
 
 import lv.volkovs.myvm.heap.Memory;
-import lv.volkovs.myvm.heap.Operand;
-import lv.volkovs.myvm.instruction.InstructionExecution;
-import lv.volkovs.myvm.instruction.InstructionExecutionContext;
+
+import lv.volkovs.myvm.instruction.Instruction;
+
 
 /**
  * @author Mihails Volkovs mihails.volkovs@gmail.com
  *         Date: 25.06.2017
  */
-public class Set implements InstructionExecution {
+public class Set implements Instruction {
 
-    private Operand register;
-    private Operand value;
+    private int register;
+    private int value;
 
-    public Set(Operand register, Operand value) {
+    public Set(int register, int value) {
         this.register = register;
         this.value = value;
     }
 
     @Override
-    public int execute(InstructionExecutionContext context) {
-        Memory memory = context.getMemory();
-        memory.set(register.toIndex(), value.toValue(memory));
+    public int execute(Memory memory, int pointer) {
+        memory.set(register, memory.constOrRegister(value));
         return DO_NOT_JUMP;
     }
 

@@ -1,26 +1,24 @@
 package lv.volkovs.myvm.instruction.impl;
 
 import lv.volkovs.myvm.heap.Memory;
-import lv.volkovs.myvm.heap.Operand;
-import lv.volkovs.myvm.instruction.InstructionExecution;
-import lv.volkovs.myvm.instruction.InstructionExecutionContext;
+import lv.volkovs.myvm.instruction.Instruction;
+
 
 /**
  * @author Mihails Volkovs mihails.volkovs@gmail.com
  *         Date: 22.06.2017
  */
-public class Out implements InstructionExecution {
+public class Out implements Instruction {
 
-    private Operand asciiCode;
+    private int asciiCode;
 
-    public Out(Operand asciiCode) {
+    public Out(int asciiCode) {
         this.asciiCode = asciiCode;
     }
 
     @Override
-    public int execute(InstructionExecutionContext context) {
-        Memory memory = context.getMemory();
-        System.out.print((char)asciiCode.toValue(memory).toInt());
+    public int execute(Memory memory, int pointer) {
+        System.out.print((char) memory.constOrRegister(asciiCode).toInt());
         return DO_NOT_JUMP;
     }
 

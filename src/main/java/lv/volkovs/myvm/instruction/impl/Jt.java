@@ -1,30 +1,29 @@
 package lv.volkovs.myvm.instruction.impl;
 
 import lv.volkovs.myvm.heap.Memory;
-import lv.volkovs.myvm.heap.Operand;
+
 import lv.volkovs.myvm.heap.Value15;
-import lv.volkovs.myvm.instruction.InstructionExecution;
-import lv.volkovs.myvm.instruction.InstructionExecutionContext;
+import lv.volkovs.myvm.instruction.Instruction;
+
 
 /**
  * @author Mihails Volkovs mihails.volkovs@gmail.com
  *         Date: 25.06.2017
  */
-public class Jt implements InstructionExecution {
+public class Jt implements Instruction {
 
-    private Operand nonzero;
+    private int nonzero;
 
     private int jumpTo;
 
-    public Jt(Operand nonzero, Operand jumpTo) {
+    public Jt(int nonzero, int jumpTo) {
         this.nonzero = nonzero;
-        this.jumpTo = jumpTo.toIndex();
+        this.jumpTo = jumpTo;
     }
 
     @Override
-    public int execute(InstructionExecutionContext context) {
-        Memory memory = context.getMemory();
-        Value15 value15 = nonzero.toValue(memory);
+    public int execute(Memory memory, int pointer) {
+        Value15 value15 = memory.constOrRegister(nonzero);
         if (value15.toInt() != 0) {
             return jumpTo;
         }

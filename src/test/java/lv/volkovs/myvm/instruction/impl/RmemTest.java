@@ -1,9 +1,9 @@
 package lv.volkovs.myvm.instruction.impl;
 
 import lv.volkovs.myvm.heap.Memory;
-import lv.volkovs.myvm.heap.Operand;
+
 import lv.volkovs.myvm.heap.Value15;
-import lv.volkovs.myvm.instruction.InstructionExecutionContext;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,12 +32,10 @@ class RmemTest {
         memory.set(10, new Value15(15));
 
         // instruction execution instance
-        Operand source = new Operand(REGISTER_2);
-        Operand target = new Operand(REGISTER_0);
-        Rmem rmem = new Rmem(target, source);
+        Rmem rmem = new Rmem(REGISTER_0, REGISTER_2);
 
         // execution
-        rmem.execute(new InstructionExecutionContext(memory, 0));
+        rmem.execute(memory, 0);
 
         // assertion
         assertThat(memory.getRegister(0).toInt()).isEqualTo(15);

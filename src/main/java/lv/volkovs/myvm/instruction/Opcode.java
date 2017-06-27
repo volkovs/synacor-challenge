@@ -55,13 +55,13 @@ public enum Opcode {
 
     private int operandsCount;
 
-    private Class<? extends InstructionExecution> executionClass;
+    private Class<? extends Instruction> executionClass;
 
-    Opcode(int code, Class<? extends InstructionExecution> executionClass) {
+    Opcode(int code, Class<? extends Instruction> executionClass) {
         this(code, 0, executionClass);
     }
 
-    Opcode(int code, int operandsCount, Class<? extends InstructionExecution> executionClass) {
+    Opcode(int code, int operandsCount, Class<? extends Instruction> executionClass) {
         this.opcode = code;
         this.operandsCount = operandsCount;
         this.executionClass = executionClass;
@@ -76,11 +76,11 @@ public enum Opcode {
         throw new UnsupportedOperationException("Unsupported opcode " + opcode);
     }
 
-    public int getOperandsCount() {
+    public int getintsCount() {
         return operandsCount;
     }
 
-    public Class<? extends InstructionExecution> getExecutionClass() {
+    public Class<? extends Instruction> getExecutionClass() {
         return executionClass;
     }
 }

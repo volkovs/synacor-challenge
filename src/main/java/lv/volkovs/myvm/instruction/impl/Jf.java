@@ -1,27 +1,28 @@
 package lv.volkovs.myvm.instruction.impl;
 
-import lv.volkovs.myvm.heap.Operand;
-import lv.volkovs.myvm.instruction.InstructionExecution;
-import lv.volkovs.myvm.instruction.InstructionExecutionContext;
+
+import lv.volkovs.myvm.heap.Memory;
+import lv.volkovs.myvm.instruction.Instruction;
+
 
 /**
  * @author Mihails Volkovs mihails.volkovs@gmail.com
  *         Date: 25.06.2017
  */
-public class Jf implements InstructionExecution {
+public class Jf implements Instruction {
 
-    private Operand zero;
+    private int zero;
 
     private int jumpTo;
 
-    public Jf(Operand zero, Operand jumpTo) {
+    public Jf(int zero, int jumpTo) {
         this.zero = zero;
-        this.jumpTo = jumpTo.toIndex();
+        this.jumpTo = jumpTo;
     }
 
     @Override
-    public int execute(InstructionExecutionContext context) {
-        if (zero.toValue(context.getMemory()).toInt() == 0) {
+    public int execute(Memory memory, int pointer) {
+        if (memory.constOrRegister(zero).toInt() == 0) {
             return jumpTo;
         }
         return DO_NOT_JUMP;

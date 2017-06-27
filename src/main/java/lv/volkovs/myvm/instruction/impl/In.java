@@ -1,9 +1,8 @@
 package lv.volkovs.myvm.instruction.impl;
 
-import lv.volkovs.myvm.heap.Operand;
+import lv.volkovs.myvm.heap.Memory;
 import lv.volkovs.myvm.heap.Value15;
-import lv.volkovs.myvm.instruction.InstructionExecution;
-import lv.volkovs.myvm.instruction.InstructionExecutionContext;
+import lv.volkovs.myvm.instruction.Instruction;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,16 +14,16 @@ import static java.lang.Integer.parseInt;
  * @author Mihails Volkovs mihails.volkovs@gmail.com
  *         Date: 22.06.2017
  */
-public class In implements InstructionExecution {
+public class In implements Instruction {
 
     private int destination;
 
-    public In(Operand destination) {
-        this.destination = destination.toIndex();
+    public In(int destination) {
+        this.destination = destination;
     }
 
     @Override
-    public int execute(InstructionExecutionContext context) {
+    public int execute(Memory memory, int pointer) {
         Value15 result;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {
@@ -34,7 +33,7 @@ public class In implements InstructionExecution {
             throw new RuntimeException(e);
         }
 
-        context.getMemory().set(destination, result);
+        memory.set(destination, result);
         return DO_NOT_JUMP;
     }
 

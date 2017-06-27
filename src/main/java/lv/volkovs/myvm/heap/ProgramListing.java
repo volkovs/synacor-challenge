@@ -1,10 +1,9 @@
 package lv.volkovs.myvm.heap;
 
-import lv.volkovs.myvm.instruction.InstructionExecution;
+import lv.volkovs.myvm.instruction.Instruction;
 import lv.volkovs.myvm.instruction.Opcode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.String.format;
@@ -17,16 +16,17 @@ public class ProgramListing extends Program {
 
     private List<String> listing = new ArrayList<>();
 
-    public ProgramListing(int[] code) {
+    ProgramListing(int[] code) {
         super(code);
         execute();
     }
 
     @Override
-    protected void executeInstruction(InstructionExecution instruction) {
+    protected void executeInstruction(Instruction instruction) {
         String opcode = instruction.getClass().getSimpleName();
-        Operand[] operands = getOperands();
-        String line = format("%n%s. %s %s", getPointer() - operands.length, opcode, Arrays.toString(operands));
+        List<String> operandRepresentations = toString(getOperands());
+
+        String line = format("%n%s. %s %s", getPointer() - getOperands().length, opcode, operandRepresentations);
         listing.add(line);
         incrementPointer();
     }
@@ -38,7 +38,7 @@ public class ProgramListing extends Program {
         return true;
     }
 
-    public List<String> getListing() {
+    List<String> getListing() {
         return listing;
     }
 

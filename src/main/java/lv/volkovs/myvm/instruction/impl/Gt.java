@@ -1,31 +1,30 @@
 package lv.volkovs.myvm.instruction.impl;
 
 import lv.volkovs.myvm.heap.Memory;
-import lv.volkovs.myvm.heap.Operand;
+
 import lv.volkovs.myvm.heap.Value15;
-import lv.volkovs.myvm.instruction.InstructionExecution;
-import lv.volkovs.myvm.instruction.InstructionExecutionContext;
+import lv.volkovs.myvm.instruction.Instruction;
+
 
 /**
  * @author Mihails Volkovs mihails.volkovs@gmail.com
  *         Date: 25.06.2017
  */
-public class Gt implements InstructionExecution {
+public class Gt implements Instruction {
 
     private int destination;
-    private Operand value1;
-    private Operand value2;
+    private int value1;
+    private int value2;
 
-    public Gt(Operand destination, Operand value1, Operand value2) {
-        this.destination = destination.toIndex();
+    public Gt(int destination, int value1, int value2) {
+        this.destination = destination;
         this.value1 = value1;
         this.value2 = value2;
     }
 
     @Override
-    public int execute(InstructionExecutionContext context) {
-        Memory memory = context.getMemory();
-        if (value1.toValue(memory).toInt() > value2.toValue(memory).toInt()) {
+    public int execute(Memory memory, int pointer) {
+        if (memory.constOrRegister(value1).toInt() > memory.constOrRegister(value2).toInt()) {
             memory.set(destination, new Value15(1));
         } else {
             memory.set(destination, new Value15(0));

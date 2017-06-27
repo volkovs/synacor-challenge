@@ -1,30 +1,29 @@
 package lv.volkovs.myvm.instruction.impl;
 
 import lv.volkovs.myvm.heap.Memory;
-import lv.volkovs.myvm.heap.Operand;
+
 import lv.volkovs.myvm.heap.Value15;
-import lv.volkovs.myvm.instruction.InstructionExecution;
-import lv.volkovs.myvm.instruction.InstructionExecutionContext;
+import lv.volkovs.myvm.instruction.Instruction;
+
 
 /**
  * @author Mihails Volkovs mihails.volkovs@gmail.com
  *         Date: 25.06.2017
  */
-public class Rmem implements InstructionExecution {
+public class Rmem implements Instruction {
 
-    private Operand destination;
-    private Operand source;
+    private int destination;
+    private int source;
 
-    public Rmem(Operand destination, Operand source) {
+    public Rmem(int destination, int source) {
         this.destination = destination;
         this.source = source;
     }
 
     @Override
-    public int execute(InstructionExecutionContext context) {
-        Memory memory = context.getMemory();
-        Value15 result = memory.get(source.toValue(memory).toInt());
-        memory.set(destination.toIndex(), result);
+    public int execute(Memory memory, int pointer) {
+        int result = memory.get(memory.constOrRegister(source).toInt());
+        memory.set(destination, new Value15(result));
         return DO_NOT_JUMP;
     }
 

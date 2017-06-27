@@ -4,6 +4,7 @@ import com.google.common.annotations.VisibleForTesting;
 
 import java.util.Stack;
 
+import static java.lang.String.format;
 import static lv.volkovs.myvm.heap.Value15.ZERO;
 
 /**
@@ -38,28 +39,39 @@ public class Memory {
         this.addressSpace = addressSpace;
     }
 
-    public Value15 get(int index) {
+    public Value15 constOrRegister(int operand) {
+
+        // value in register
+        if (isRegister(operand)) {
+            return new Value15(get(operand));
+        }
+
+        // constant value
+        return new Value15(operand);
+    }
+
+    public int get(int index) {
         if (isRegister(index)) {
             Value15 register = registers[index % MAX_VALUE - 1];
             if (register == null) {
-                return ZERO;
+                return 0;
             }
-            return register;
+            return register.toInt();
         }
-        return new Value15(addressSpace[index]);
+        return addressSpace[index];
     }
 
     public void set(int index, Value15 value) {
         if (isRegister(index)) {
-            registers[index % MAX_VALUE - 1] = value;
+            registers[toRegisterNumber(index)] = value;
         } else {
             addressSpace[index] = value.toInt();
         }
     }
 
     @VisibleForTesting
-    boolean isRegister(int index) {
-        return index / (MAX_VALUE + 1) > 0;
+    static boolean isRegister(int index) {
+        return index > MAX_VALUE;
     }
 
     public Value15 pop() {
@@ -82,4 +94,11 @@ public class Memory {
         return result;
     }
 
+    static String toString(int operand) {
+        return isRegister(operand) ? format("Register %s", toRegisterNumber(operand)) : format("Const %s", operand);
+    }
+
+    private static int toRegisterNumber(int index) {
+        return index % MAX_VALUE - 1;
+    }
 }

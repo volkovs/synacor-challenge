@@ -1,23 +1,24 @@
 package lv.volkovs.myvm.instruction.impl;
 
-import lv.volkovs.myvm.heap.Operand;
-import lv.volkovs.myvm.instruction.InstructionExecution;
-import lv.volkovs.myvm.instruction.InstructionExecutionContext;
+
+import lv.volkovs.myvm.heap.Memory;
+import lv.volkovs.myvm.instruction.Instruction;
+
 
 /**
  * @author Mihails Volkovs mihails.volkovs@gmail.com
  *         Date: 25.06.2017
  */
-public class Jmp implements InstructionExecution {
+public class Jmp implements Instruction {
 
     private int jumpTo;
 
-    public Jmp(Operand jumpTo) {
-        this.jumpTo = jumpTo.toIndex();
+    public Jmp(int jumpTo) {
+        this.jumpTo = jumpTo;
     }
 
     @Override
-    public int execute(InstructionExecutionContext context) {
+    public int execute(Memory memory, int pointer) {
         return jumpTo;
     }
 

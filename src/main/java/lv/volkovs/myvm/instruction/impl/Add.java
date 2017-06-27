@@ -1,33 +1,30 @@
 package lv.volkovs.myvm.instruction.impl;
 
 import lv.volkovs.myvm.heap.Memory;
-import lv.volkovs.myvm.heap.Operand;
 import lv.volkovs.myvm.heap.Value15;
-import lv.volkovs.myvm.instruction.InstructionExecution;
-import lv.volkovs.myvm.instruction.InstructionExecutionContext;
+import lv.volkovs.myvm.instruction.Instruction;
+
 
 /**
  * @author Mihails Volkovs mihails.volkovs@gmail.com
  *         Date: 25.06.2017
  */
-public class Add implements InstructionExecution {
+public class Add implements Instruction {
 
     private int destination;
-    private Operand operand1;
-    private Operand operand2;
+    private int operand1;
+    private int operand2;
 
-    public Add(Operand destination, Operand operand1, Operand operand2) {
-        this.destination = destination.toIndex();
+    public Add(int destination, int operand1, int operand2) {
+        this.destination = destination;
         this.operand1 = operand1;
         this.operand2 = operand2;
     }
 
     @Override
-    public int execute(InstructionExecutionContext context) {
-        Memory memory = context.getMemory();
-        Value15 value1 = operand1.toValue(memory);
-        Value15 value2 = operand2.toValue(memory);
-
+    public int execute(Memory memory, int pointer) {
+        Value15 value1 = memory.constOrRegister(operand1);
+        Value15 value2 = memory.constOrRegister(operand2);
         Value15 result = value1.add(value2);
         memory.set(destination, result);
         return DO_NOT_JUMP;

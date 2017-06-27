@@ -1,12 +1,14 @@
 package lv.volkovs.myvm.heap;
 
-import lv.volkovs.myvm.instruction.InstructionExecution;
-import lv.volkovs.myvm.instruction.InstructionExecutionContext;
+import lv.volkovs.myvm.instruction.Instruction;
 import lv.volkovs.myvm.instruction.Opcode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static lv.volkovs.myvm.instruction.InstructionExecutionFactory.create;
+import java.util.ArrayList;
+import java.util.List;
+
+import static lv.volkovs.myvm.instruction.InstructionFactory.create;
 import static lv.volkovs.myvm.instruction.Opcode.valueOf;
 
 /**
@@ -23,7 +25,7 @@ public class Program {
 
     private int pointer = 0;
 
-    private Operand[] operands;
+    private Integer[] operands;
 
     public Program(int[] code) {
         this.code = code;
@@ -46,10 +48,10 @@ public class Program {
             }
 
             // additionally reading operation arguments
-            int operandsCount = opcode.getOperandsCount();
-            operands = new Operand[operandsCount];
+            int operandsCount = opcode.getintsCount();
+            operands = new Integer[operandsCount];
             for (int i = 0; i < operands.length; i++) {
-                operands[i] = new Operand(code[++pointer]);
+                operands[i] = code[++pointer];
             }
             logExecution(opcode);
 
@@ -65,13 +67,13 @@ public class Program {
 
     protected void logExecution(Opcode opcode) {
         if (!"OUT".equals(opcode.name())) {
-            // LOG.debug(String.format("%s. Executing opcode: %s %s", pointer - operands.length, opcode, Arrays.toString(operands)));
+//            List<String> operandRepresentations = toString(getOperands());
+//            LOG.debug(String.format("%s. Executing opcode: %s %s", pointer - operands.length, opcode, operandRepresentations));
         }
     }
 
-    protected void executeInstruction(InstructionExecution instruction) {
-        InstructionExecutionContext executionContext = new InstructionExecutionContext(memory, pointer);
-        int jumpTo = instruction.execute(executionContext);
+    protected void executeInstruction(Instruction instruction) {
+        int jumpTo = instruction.execute(memory, pointer);
         if (jumpTo > 0) {
             pointer = jumpTo;
         } else {
@@ -87,7 +89,15 @@ public class Program {
         pointer++;
     }
 
-    Operand[] getOperands() {
+    Integer[] getOperands() {
         return operands;
+    }
+
+    protected List<String> toString(Integer[] operands) {
+        List<String> operandRepresentations = new ArrayList<>();
+        for (Integer operand : operands) {
+            operandRepresentations.add(Memory.toString(operand));
+        }
+        return operandRepresentations;
     }
 }
